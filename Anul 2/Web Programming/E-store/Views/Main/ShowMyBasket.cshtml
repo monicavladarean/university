@@ -1,0 +1,56 @@
+﻿@using lab9.DataAbstractionLayer
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <style>
+    .body{
+    background-color:lightcyan
+    }
+    </style>
+</head>
+<body class="body">
+    <a href="@Url.Action("HomePage", "Main")">HomePage</a>
+    <br><br>
+    <div align="center">
+        <h1>My basket</h1>
+        <br><br>
+        <table border="1" id="basket"></table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $.get("/Main/GetBasketForUser", function (data, status) {
+                console.log(data);
+                $("#basket").html("");
+                $("#basket").append(data);
+            })
+
+        $("#basket").delegate("tr.rows", "click", function(e) {
+            $.ajax({
+              url: '@Url.Action("GetBasketItemById", "Main")',
+              type: 'GET',
+              dataType: 'json',
+              data: {id: e.target.innerHTML},
+                success: function (basketItem) {
+                var link = '@Url.Action("TakeBasketItem", "Main", new {id = "id2", productId = "productId2", quantity = "quantity2"})';
+                link = link.replace("id2", basketItem.Id);
+                link = link.replace("productId2", basketItem.ProductId);
+                link = link.replace("quantity2", basketItem.Quantity);
+                link = link.replace(/&amp;/g, "&");
+                  console.log(link);
+                  console.log(basketItem);
+                window.location.href = link;
+              }
+              })
+          })
+        });
+    </script>
+</body>
+</html>
+

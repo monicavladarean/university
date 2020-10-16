@@ -1,0 +1,51 @@
+﻿@using lab9.Models
+
+@model lab9.Models.BasketItem
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <style>
+
+        .div1 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 30em;
+            height: 18em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+            align-content: center;
+        }
+
+        .body {
+            background-color: lightgreen
+        }
+    </style>
+</head>
+<body class="body">
+    <a href="@Url.Action("HomePage", "Main")">HomePage</a>
+    @using (Html.BeginForm("SaveBasketItem", "Main"))
+    {
+    <div class="div1">
+        <h1>What do you buy?</h1>
+        <p>
+            Product
+            @Html.TextBoxFor(model => model.ProductId, new { placeholder = "Enter product" })
+            @Html.ValidationMessageFor(model => model.ProductId)
+        </p>
+        <p>
+            Quantity
+            @Html.TextBoxFor(model => model.Quantity, new { placeholder = "Enter quantity" })
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </p>
+        <p>
+            <input type="submit" value="Add To Basket" />
+        </p>
+    </div>
+    }
+</body>
+</html>
+
+

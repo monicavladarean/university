@@ -1,0 +1,105 @@
+USE Ferryboats
+GO
+
+CREATE TABLE Ferryboats
+(
+	FID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	FerryboatName VARCHAR(300)
+)
+
+CREATE TABLE Trips
+(
+	TRID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	DepartureTime DATETIME,
+	Distance INT,
+	TicketPrice INT,
+	DeparturePort VARCHAR(100),
+	DestinationPort VARCHAR(100),
+	FID SMALLINT REFERENCES Ferryboats (FID)
+)
+
+CREATE TABLE Drivers
+(
+	DID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	DriverName VARCHAR(100)
+)
+
+CREATE TABLE Cars
+(
+	CID SMALLINT PRIMARY KEY IDENTITY(1, 1),
+	RegistrationNumber INT,
+	DID SMALLINT REFERENCES Drivers (DID)
+)
+
+
+CREATE TABLE Tickets
+(
+	DID SMALLINT REFERENCES Drivers(DID),
+	TRID SMALLINT REFERENCES Trips (TRID),
+	PRIMARY KEY(DID, TRID)
+)	
+
+GO
+
+CREATE OR ALTER PROCEDURE procDeleteDriver
+	@DriverName VARCHAR(100)
+	AS
+		DECLARE @DID INT = (SELECT DID FROM Drivers WHERE DriverName = @DriverName)
+			
+		DELETE FROM Tickets WHERE DID=@DID;
+		DELETE FROM Cars WHERE DID = @DID;
+		DELETE FROM Drivers WHERE DriverName = @DriverName;
+	GO
+
+INSERT INTO Ferryboats VALUES ('f1')
+INSERT INTO Trips VALUES ('2007-05-08 12:35:00',10,10,'p1','p2',1)
+INSERT INTO Drivers VALUES ('Agache')
+INSERT INTO Cars VALUES (1,3)
+INSERT INTO Tickets VALUES (3,1)
+
+SELECT * FROM Ferryboats
+SELECT * FROM Trips
+SELECT * FROM Drivers
+SELECT * FROM Cars
+SELECT * FROM Tickets
+
+EXECUTE procDeleteDriver 'Agache'
+
+GO
+
+CREATE OR ALTER VIEW view_allTripsDrivers
+AS
+SELECT D.DriverName,TR.Distance
+FROM Drivers D
+INNER JOIN Tickets T
+ON T.DID=D.DID
+INNER JOIN Trips TR
+ON TR.TRID=T.TRID
+WHERE ((SELECT COUNT(*) FROM Tickets WHERE DID=D.DID)=
+	(
+		SELECT COUNT(*)
+		FROM Trips
+	))
+GO
+
+SELECT * FROM view_allTripsDrivers
+
+GO
+
+CREATE OR ALTER FUNCTION func_tripData (@F VARCHAR(300), @C INT)
+RETURNS TABLE
+RETURN SELECT T.DeparturePort,T.DestinationPort,T.DepartureTime
+FROM Trips T
+WHERE T.TRID IN
+	(
+		SELECT TK.TRID
+		FROM Cars C
+		INNER JOIN Tickets TK
+		ON TK.DID=C.DID
+		WHERE C.RegistrationNumber=@C
+		GROUP BY TK.TRID
+		HAVING T.FID=(SELECT FID FROM Ferryboats WHERE FerryboatName=@F)
+		
+	)
+
+SELECT * FROM func_tripData ('f1',1)

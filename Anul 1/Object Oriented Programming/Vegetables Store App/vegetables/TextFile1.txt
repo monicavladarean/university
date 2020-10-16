@@ -1,0 +1,7 @@
+a potato fruit
+b cucumber fruit
+c tomato leaves
+a lemon leaves
+b melon fruit
+c orange fruit
+d strawberry stem,root
