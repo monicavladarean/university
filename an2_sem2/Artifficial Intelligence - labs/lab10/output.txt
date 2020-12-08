@@ -1,0 +1,4 @@
+For humidity: 65 and temperature: 17 => operating time: 44.375
+For humidity: 10 and temperature: 17 => operating time: 68.57142857142857
+For humidity: 10 and temperature: 30 => operating time: 84.0
+For humidity: 75 and temperature: 20 => operating time: 37.5

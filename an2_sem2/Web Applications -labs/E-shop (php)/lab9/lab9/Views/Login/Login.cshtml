@@ -1,0 +1,52 @@
+﻿@model lab9.Models.User
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <style>
+
+        .div1 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 30em;
+            height: 18em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+            align-content: center;
+        }
+
+        .body{
+            background-color:lightyellow
+        }
+    </style>
+</head>
+
+<body class="body">
+    @using (Html.BeginForm("Login", "Login"))
+    {
+        <div class="div1">
+            <div></div>
+            <h1>Login Here</h1>
+            <div>
+                <p>
+                    Username
+                    @Html.TextBoxFor(model => model.Username, new { placeholder = "Enter username" })
+                    @Html.ValidationMessageFor(model => model.Username)
+                </p>
+                <p>
+                    Password
+                    @Html.PasswordFor(model => model.Password, new { placeholder = "Enter password" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </p>
+                <p>
+                    <input type="submit" value="Login" />
+                </p>
+            </div>
+        </div>
+    }
+</body>
+</html>
+

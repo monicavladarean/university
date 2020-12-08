@@ -1,0 +1,70 @@
+PrgState{
+ id=1
+ exeStack=Stack{stack=[CompStmt{first=VarDeclStmt{name='v', typ=IntType{}}, second=CompStmt{first=AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}, second=PrintStmt{exp=VarExp{id='v'}}}}]}, 
+ symTable=MyDictionary{dictionary={}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[CompStmt{first=AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}, second=PrintStmt{exp=VarExp{id='v'}}}, VarDeclStmt{name='v', typ=IntType{}}]}, 
+ symTable=MyDictionary{dictionary={}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[CompStmt{first=AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}, second=PrintStmt{exp=VarExp{id='v'}}}, VarDeclStmt{name='v', typ=IntType{}}]}, 
+ symTable=MyDictionary{dictionary={}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[CompStmt{first=AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}, second=PrintStmt{exp=VarExp{id='v'}}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=0}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[CompStmt{first=AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}, second=PrintStmt{exp=VarExp{id='v'}}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=0}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[PrintStmt{exp=VarExp{id='v'}}, AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=0}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[PrintStmt{exp=VarExp{id='v'}}, AssignStmt{id='v', exp=ValueExp{e=IntValue{val=2}}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=0}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[PrintStmt{exp=VarExp{id='v'}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=2}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[PrintStmt{exp=VarExp{id='v'}}]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=2}}},
+  out=MyList{list=[]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}
+PrgState{
+ id=1
+ exeStack=Stack{stack=[]}, 
+ symTable=MyDictionary{dictionary={v=IntValue{val=2}}},
+  out=MyList{list=[IntValue{val=2}]},
+  fileTable=FileTable{table={}},
+  heap=Heap{heap={}, NewFreeAddress=0}}

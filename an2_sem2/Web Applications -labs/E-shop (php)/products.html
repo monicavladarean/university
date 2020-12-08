@@ -1,0 +1,81 @@
+<html>
+<head>
+<script>
+var currentPage=1;
+
+function showUser(str) 
+{
+    if (str == "") 
+	{
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } 
+	else 
+	{
+            xmlhttp = new XMLHttpRequest();
+   
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) 
+			{
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","server.php/products?q="+str+"&pageNumber="+currentPage,true);
+        xmlhttp.send();
+    }
+}
+
+function addSuccess(productId,quantity)
+{
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","server.php/add?q="+productId+"&t="+quantity,true);
+        xmlhttp.send();
+}
+
+function showPage($nr)
+{
+currentPage+=$nr;
+showUser(document.getElementById("users").value);
+document.getElementById("crtPage").innerHTML="Current page: "+currentPage;
+}
+
+</script>
+</head>
+
+<style>
+body 
+{
+  background-image: url('bg.jpg');
+  font-weight: bold;
+}
+</style>
+
+<body>
+<button type="button" onclick="window.location.href='http://localhost/lab8/main.html'"> Go back to main page </button>
+<br><br><br>
+<form>
+<select name="users" id="users" onchange="showPage(0)">
+  <option value="">Select a criteria:</option>
+  <option value="1">women</option>
+  <option value="2">men</option>
+  <option value="3">all</option>
+ </select>
+</form>
+<br>
+<div id="txtHint" align="center"><b>Shopping info...</b></div>
+<br><br>
+<div align="center">
+<button type="button" onclick="showPage(-1)"> Previous page </button>
+<label id="crtPage"> </label>
+<button type="button" onclick="showPage(1)"> Next page </button>
+</div>
+<br><br>
+
+<form>
+  Buy product with id: <input type="text" id="addId" name="addId">
+  Quantity: <input type="text" id="quantity" name="quantity">
+  <input type="button" value="Submit" onclick="addSuccess(this.form.addId.value,this.form.quantity.value);window.location.href='http://localhost/lab8/addconf.html'"/>
+</form>
+
+</body>
+</html>

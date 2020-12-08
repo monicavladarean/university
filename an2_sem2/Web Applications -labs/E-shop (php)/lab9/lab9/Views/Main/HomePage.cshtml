@@ -1,0 +1,82 @@
+﻿@using lab9.DataAbstractionLayer
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <style>
+        .button {
+            border-radius: 15px;
+        }
+        .body {
+            background-color: lightcyan
+        }
+    </style>
+</head>
+<body class="body">
+    <h2>Welcome to our shop, @Session["Username"].ToString()!</h2>
+    <a href="@Url.Action("ShowBasket", "Main")"><i>My basket</i></a>
+    <br>
+    <a href="@Url.Action("Logout", "Logout")"><i>Logout</i></a>
+    <br><br>
+
+        <div align="center">
+            <div>
+                <select id="selection" name="selection">
+                    <option value="">Select a type</option>
+                    <option value="women">women</option>
+                    <option value="men">men</option>
+                </select>
+                <br><br>
+                <table border="1" id="products"></table>
+            </div>
+            <div>
+                <br><br>
+                <button id="previous" type="button" class="button"> Previous page </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next" type="button" class="button"> Next page  </button> 
+            </div>
+            <div>
+                <br><br>
+                <input type="button" class="button" value="Buy something!" onclick="location.href='@Url.Action("AddToBasket", "Main")'" />
+            </div>
+        </div>
+<script>
+var currentPage = 1;
+    $(document).ready(function () {
+        currentPage = 1;
+    $.get("/Main/GetProductsFilteredByDescription", { description: "", pageNo: currentPage }, function (data, status) {
+        console.log(data);
+        $("#products").html("");
+        $("#products").append(data);
+    });
+    $('select').on('change', function () {
+        currentPage = 1;
+        console.log(this.value);
+        $.get("/Main/GetProductsFilteredByDescription", { description: this.value, pageNo: currentPage }, function (data, status) {
+                console.log(this.value);
+              $("#products").html(data);
+            });
+    });
+    $('#previous').on('click', function () {
+        currentPage = currentPage - 1;
+        $.get("/Main/GetProductsFilteredByDescription", { description: $('#selection')[0].value, pageNo: currentPage }, function (data, status) {
+            $("#products").html(data);
+            });
+    }); 
+
+    $('#next').on('click', function () {
+        currentPage = currentPage + 1;
+        $.get("/Main/GetProductsFilteredByDescription", { description: $('#selection')[0].value, pageNo: currentPage }, function (data, status) {
+            $("#products").html(data);
+        });
+    }); 
+});
+</script>
+</body>
+</html>
+

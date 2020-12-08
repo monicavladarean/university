@@ -1,0 +1,54 @@
+<html>
+<head>
+<script>
+function showUser() 
+{
+            xmlhttp = new XMLHttpRequest();
+   
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) 
+			{
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","server.php/basket?q=",true);
+        xmlhttp.send();
+
+}
+
+function deleteSuccess(str)
+{
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","server.php/delete?q="+str,true);
+        xmlhttp.send();
+}
+
+function updateSuccess(id,quantity)
+{
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","server.php/update?q="+id+"&t="+quantity,true);
+        xmlhttp.send();
+}
+
+</script>
+</head>
+<body onload="showUser()">
+<button type="button" onclick="window.location.href='http://localhost/lab8/main.html'"> Go back to main page </button>
+<br><br>
+<div align="center"><h1>My basket</h1></div>
+<br><br><br>
+<div id="txtHint" align="center"><b>Basket info...</b></div>
+<br><br><br>
+
+<form>
+  Delete purchase with id: <input type="text" id="deleteId" name="deleteId">
+  <input type="button" value="Submit" onclick="deleteSuccess(this.form.deleteId.value);window.location.href='http://localhost/lab8/deleteconf.html' "/>
+</form>
+<br><br><br>
+<form>
+  Update purchase with id: <input type="text" id="updateId" name="updateId">
+  New quantity: <input type="text" id="quantity" name="quantity">
+  <input type="button" value="Submit" onclick="updateSuccess(this.form.updateId.value,this.form.quantity.value);showUser();showUser() "/>
+</form>
+</body>
+</html>

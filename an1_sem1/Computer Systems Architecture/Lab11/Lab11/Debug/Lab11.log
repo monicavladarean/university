@@ -1,0 +1,3 @@
+﻿  modul.asm:24: error: symbol `_s2' undefined
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: The command "C:\nasm modul.asm -f win32 -g -o functie.obj
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: :VCEnd" exited with code 1.

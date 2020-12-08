@@ -1,0 +1,57 @@
+﻿@using lab9.Models
+
+@model lab9.Models.BasketItem
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+
+        .div1 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 30em;
+            height: 18em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+            align-content: center;
+        }
+
+        .body {
+            background-color: lightsalmon
+        }
+    </style>
+</head>
+<body class="body">
+    <a href="@Url.Action("ShowBasket", "Main")">My Basket</a>
+
+    @using (Html.BeginForm(""))
+    {
+        <div class="div1">
+            <div>
+                <h1>Details</h1>
+                <p>
+                    ID
+                    @Html.TextBoxFor(model => model.Id)
+                </p>
+                <p>
+                    ProductID
+                    @Html.TextBoxFor(model => model.ProductId)
+                </p>
+                <p>
+                    Quantity
+                    @Html.TextBoxFor(model => model.Quantity)
+                </p>
+                <p>
+                    <input type="submit" value="RemoveBasketItem" onclick="return confirm('Are you sure?')" formaction="/Main/RemoveBasketItem" formmethod="get" />
+                </p>
+            </div>
+        </div>
+    }
+</body>
+</html>
